@@ -1,7 +1,12 @@
 <h1>
     <%= gravatar_for @user %>
     
-    <%= @user.name %>
+    <%= @user.name %><br>
+    
+    <%= @user.email %>
+    <%= @user.profile %>
+    <%= @user.area %>                
+    <%= link_to "edit", edit_user_path(@user) %>
     
     
 </h1>
