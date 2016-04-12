@@ -5,22 +5,24 @@
         <%= render 'shared/user_info' %>
       </section>
       <section class="micropost_form">
-        <%= render 'shared/micropost_form' %>
+        <%# render 'shared/micropost_form' %>
       </section>
     </aside>
     <aside class="col-md-8">
       
-      aa
+<h3>Following users</h3>
+<ol class="microposts">
+<% @following_users.each do |following_users| %>
+<%= link_to gravatar_for(following_users, size: 50), following_users %>
+<%= following_users.name %>
+<%= following_users.email %>
+<hr>
+<% end %>
       
     </aside>
     
     
     
   </div>
-<% else %>
-  <div class="center jumbotron">
-    <h1>Welcome to the Microposts</h1>
-
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  </div>
 <% end %>
+

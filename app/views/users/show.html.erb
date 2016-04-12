@@ -5,7 +5,23 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      
     </section>
+    
+      <div class="col-md-6">
+        following(
+
+<%= link_to (@following_users.count) , following_user_path %>)
+
+   
+        
+      </div>
+      <div class="col-md-6">
+        followers(
+<%= link_to (@follower_users.count) , follower_user_path %>)
+
+
+      </div>   
   </aside>
   <div class="col-md-8">
   <%= render 'follow_form' if logged_in? %>  
@@ -15,5 +31,12 @@
         <%= render @microposts %>
       </ol>
     <% end %>
+  
+
+    
+    
+    
+    
+    
   </div>
 </div>

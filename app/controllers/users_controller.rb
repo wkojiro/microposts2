@@ -41,7 +41,23 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts
+    @micropost = current_user.microposts.build if logged_in?    
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users    
   end
+  
+  
+  def following
+    @user = User.find(params[:id])    
+    @following_users = @user.following_users
+  end
+  
+  def follower
+    @user = User.find(params[:id])    
+    @follower_users = @user.follower_users
+  end
+  
+  
   
   private
   
