@@ -24,7 +24,13 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower  
   
-
+  has_many :favorites, class_name: "Favorite",
+                       foreign_key: "favpost_id",
+                       dependent: :destroy
+                  
+  has_many :favposts, through: :favorites, source: :favorite
+  
+                      
 
   # 他のユーザーをフォローする
   def follow(other_user)
@@ -47,5 +53,15 @@ class User < ActiveRecord::Base
   end  
 
 
+  # あるPostをお気に入りにする
+  def favorite(user)
+    favorites.create(favpost_id: micropost.id)
+  end
+
+  # あるPostをお気に入りから解除する これだと何となく、favpost.idだけが消えてしまう！？。関係そのものを消すには、本来的にはfavorite.idを削除すべき！？userが引数に来ているからこれでもいいのかな？
+  def unfavorite(user)
+    favorites.find_by(favpost_id: micropost.id).destroy
+  end
+  
 
 end
