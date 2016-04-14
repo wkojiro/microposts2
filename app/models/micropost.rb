@@ -7,6 +7,7 @@ class Micropost < ActiveRecord::Base
                        foreign_key: "favuser_id",
                        dependent: :destroy
                   
-  has_many :favusers, through: :favorites, source: :favorite  
+  has_many :favusers, through: :favorites, source: :favuser  
+  
   
 end
