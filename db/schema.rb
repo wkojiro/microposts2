@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414051348) do
+ActiveRecord::Schema.define(version: 20160415024329) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "favuser_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160414051348) do
   end
 
   add_index "favorites", ["favpost_id"], name: "index_favorites_on_favpost_id"
-  add_index "favorites", ["favuser_id", "favpost_id"], name: "index_favorites_on_favuser_id_and_favpost_id"
+  add_index "favorites", ["favuser_id", "favpost_id"], name: "index_favorites_on_favuser_id_and_favpost_id", unique: true
   add_index "favorites", ["favuser_id"], name: "index_favorites_on_favuser_id"
 
   create_table "microposts", force: :cascade do |t|

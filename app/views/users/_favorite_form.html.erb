@@ -1,8 +1,7 @@
  <div id="favorite_form">
   <% if current_user.favorite?(@micropost) %>
-    <%= render 'users/unfavorite', locals: {micropost: @micropost} %>
+    <%= render 'users/unfavorite' %>
   <% else %>
-    <%= render 'users/favorite', locals: {micropost: @micropost} %>
+    <%= render 'users/favorite' %>
   <% end %>
-  </div>
-
+ </div>

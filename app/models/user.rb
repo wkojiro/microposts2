@@ -25,14 +25,14 @@ class User < ActiveRecord::Base
   has_many :follower_users, through: :follower_relationships, source: :follower  
   
   has_many :favorites, class_name: "Favorite",
-                       foreign_key: "favpost_id",
+                       foreign_key: "favuser_id",
                        dependent: :destroy
                   
   has_many :favposts, through: :favorites, source: :favpost
   
                       
 
-  # 他のユーザーをフォローする
+  # 他のユーザーをフォローする(他のユーザーのIDを取得している？)
   def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
   end
