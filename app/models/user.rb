@@ -60,11 +60,11 @@ class User < ActiveRecord::Base
 
   # あるPostをお気に入りから解除する これだと何となく、favpost.idだけが消えてしまう！？。関係そのものを消すには、本来的にはfavorite.idを削除すべき！？userが引数に来ているからこれでもいいのかな？
   def unfavorite(micropost)
-    favorites.find_by(favpost_id: micropost.id).destroy
+    favorites.find_by(id).destroy
   end
   
   def favorite?(micropost)
-    favorites.include?(micropost)
+    favposts.include?(micropost)
   end
 
 end

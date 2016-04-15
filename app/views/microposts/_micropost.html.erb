@@ -11,15 +11,19 @@
       <%= link_to "delete2", micropost_path(micropost), method: :delete, data: { confirm: "You sure?" } %>
 
    <% end %>    
-    <% if micropost.user.id != current_user.id %>
+
       <%# render partial: 'users/favorite_form' %>
       <%#= micropost.id %>
 <!--パーシャルの代用　-->      
  <div id="favorite_form">
+     
+     <%= current_user.favorites.count %>
+    <%= current_user.favorites.find_by(favpost_id: micropost.id).inspect %>
+
   <% if current_user.favorite?(micropost) %>
     <%# render 'users/unfavorite' %>
-<%= form_for(current_user.favorites.find_by(favpost_id: micropost.id),
-             html: { method: :delete }) do |f| %>
+    <%= micropost.id %>
+<%= form_for(current_user.favorites.find_by(favpost_id: micropost.id), html: { method: :delete }) do |f| %>
   <%= f.submit "Unfavorite", class: "btn btn-default btn-xs" %>
 <% end %>
 
@@ -33,7 +37,7 @@
   <%= f.submit "Favorite", class: "btn btn-primary btn-xs" %>
 <% end %>    
     
-  <% end %>
+
  </div>      
 <!--パーシャルの代用　-->      
       
