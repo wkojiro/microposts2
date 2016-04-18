@@ -26,17 +26,37 @@ class FavoritesController < ApplicationController
     def fav
          @favpost = Micropost.find(params[:id])        
         current_user.favorite(@favpost) 
-        redirect_to root_path
+        puts @favpost.id
+        redirect_to request.referrer || root_url         
+#        controller_name = controller_name
+#         if controller_name == static_pages
+#          redirect_to root_path
+#         elsif controller_name == users
+#          redirect_to @user
+#         end
     end
     
-    def unfav
-        @unfavpost = current_user.favorites.find_by(params[:id])
-   #     @unfavpost = current_user.favorites.find_by(favpost_id: params[:id])
-  #      puts @unfavpost
-  #         @unfavpost = Micropost.find(params[:id])   
-        current_user.unfavget(@unfavpost)
-        redirect_to root_path   
     
+    def unfav
+ #       binding.pry
+        @favpost = Micropost.find(params[:id])   
+        @unfavpost = current_user.favorites.where(favpost_id: @favpost.id) 
+        puts @unfavpost.inspect
+#        @ids = @unfavpost.pluck :id
+         Favorite.find(@unfavpost[0]).destroy
+#       @unfavpost = current_user.favorites.find_by(favpost_id: params[:id])
+#       puts @unfavpost
+#       @unfavpost = Micropost.find(params[:id])   
+
+#        current_user.unfavget(@ids)
+ #       puts @unfavpost
+        redirect_to request.referrer || root_url 
+#        controller_name = controller_name
+#         if controller_name == static_pages
+#          redirect_to root_path
+#         elsif controller_name == users
+#          redirect_to @user
+#         end
     end
     
     
