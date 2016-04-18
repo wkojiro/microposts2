@@ -23,12 +23,22 @@ class User < ActiveRecord::Base
                                     foreign_key: "followed_id",
                                     dependent:   :destroy
   has_many :follower_users, through: :follower_relationships, source: :follower  
-  
+
+#favorite  
+
   has_many :favorites, class_name: "Favorite",
                        foreign_key: "favuser_id",
                        dependent: :destroy
                   
   has_many :favposts, through: :favorites, source: :favpost
+  
+#retweet  
+  
+  has_many :retweets, class_name: "Retweet",
+                       foreign_key: "retweetuser_id",
+                       dependent: :destroy
+                  
+  has_many :retweetposts, through: :retweets, source: :retweetpost
   
                       
 
@@ -67,4 +77,15 @@ class User < ActiveRecord::Base
     favposts.include?(micropost)
   end
 
+  def retweet(micropost)
+    retweets.find_or_create_by(retweetpost_id: micropost.id)
+  end
+
+  def unretweet(micropost)
+    retweets.find_by(id).destroy
+  end
+
+  def retweet?(micropost)
+    retweetposts.include?(micropost)
+  end
 end

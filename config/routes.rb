@@ -22,8 +22,6 @@ Rails.application.routes.draw do
    end
  end
  
-  
- 
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts do
      member do
@@ -40,6 +38,13 @@ Rails.application.routes.draw do
  #      get 'retweet' => 'microposts#retweet'
      end
    end
+  resources :retweets, only:[:create, :destroy] do
+    member do
+       get 'retweet' => 'retweets#create'
+       get 'unretweet' => 'retweets#destroy'
+     end
+   end 
+   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

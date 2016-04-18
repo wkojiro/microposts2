@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415024329) do
+ActiveRecord::Schema.define(version: 20160418103248) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "favuser_id"
@@ -44,6 +44,17 @@ ActiveRecord::Schema.define(version: 20160415024329) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "retweets", force: :cascade do |t|
+    t.integer  "retweetuser_id"
+    t.integer  "retweetpost_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "retweets", ["retweetpost_id"], name: "index_retweets_on_retweetpost_id"
+  add_index "retweets", ["retweetuser_id", "retweetpost_id"], name: "index_retweets_on_retweetuser_id_and_retweetpost_id", unique: true
+  add_index "retweets", ["retweetuser_id"], name: "index_retweets_on_retweetuser_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

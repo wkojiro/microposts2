@@ -23,7 +23,13 @@
      <%#= render partial: 'users/unfav', locals: { micropost: micropost } %>    
     <% end %>
   </div>  
-    <%= link_to "retweet", retweet_micropost_path(micropost), :class => "btn btn-info btn-xs" %>    
+ <div id="retweetpst_<%= micropost.id %>" > 
+    <% if current_user.retweet?(micropost) %> aa
+     <%= link_to "unretweet", unretweet_retweet_path(micropost), :class => "btn btn-default btn-xs" %>    
+    <% else %>bb
+     <%= link_to "retweet", retweet_retweet_path(micropost), :class => "btn btn-info btn-xs" %>  
+    <% end %>  
+ </div>
 <!--パーシャルの代用　-->  
       <%# @favorites = Favorite.all.inspect %> 
       <%#= render partial: 'users/favorite_form', locals: { micropost: micropost } %>

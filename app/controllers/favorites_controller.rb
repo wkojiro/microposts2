@@ -41,8 +41,6 @@ class FavoritesController < ApplicationController
  #       binding.pry
         @favpost = Micropost.find(params[:id])   
         @unfavpost = current_user.favorites.where(favpost_id: @favpost.id) 
-        puts @unfavpost.inspect
-#        @ids = @unfavpost.pluck :id
          Favorite.find(@unfavpost[0]).destroy
 #       @unfavpost = current_user.favorites.find_by(favpost_id: params[:id])
 #       puts @unfavpost
