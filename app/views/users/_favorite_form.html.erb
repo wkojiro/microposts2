@@ -1,0 +1,10 @@
+<div id="favorite_form_<%= micropost.id %>">
+  <% if current_user.favorite?(micropost) %>
+    <%= render partial: 'users/unfavorite', locals: { micropost: micropost } %>
+    <%#= render partial: 'users/unfavorite', locals: { micropost: micropost } %>    
+    <%#= render partial: 'users/unfavorite', collection: micropost %>    
+  <% else %>
+    <%= render partial: 'users/favorite', locals: { micropost: micropost } %>
+    <%#= render partial: 'users/favorite', collection: micropost %>
+  <% end %>
+</div>

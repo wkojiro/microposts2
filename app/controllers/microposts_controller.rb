@@ -27,6 +27,23 @@ class MicropostsController < ApplicationController
     
     end
     
+    def fav
+     @fav = Micropost.find(params[:id])
+     current_user.favorite(@fav)    
+    end
+    
+    def unfav
+     @unfav = Favorite.find(params[:id])    
+     current_user.unfavorite(@unfav)        
+    end
+    
+    def retweet
+    end
+    
+    
+    
+    
+    
     
     private
     def micropost_params

@@ -9,42 +9,30 @@
    <% if current_user == micropost.user %>
       <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
       <%= link_to "delete2", micropost_path(micropost), method: :delete, data: { confirm: "You sure?" } %>
-
-   <% end %>    
-
-      <%# render partial: 'users/favorite_form' %>
-      <%#= micropost.id %>
-<!--パーシャルの代用　-->      
- <div id="favorite_form">
-     
-     <%= current_user.favorites.count %>
-    <%= current_user.favorites.find_by(favpost_id: micropost.id).inspect %>
-
+   <% end %> 
+   <div id="goodpst_<%= micropost.id %>" > 
+    <% if current_user.favorite?(micropost) %> 
+    <%= link_to "いいね解除", unfavorite_favorite_path(micropost), :class => "btn btn-default btn-xs" %>
+    <% else %>
+    <%= link_to "いいね", favorite_favorite_path(micropost), :class => "btn btn-primary btn-xs" %>     
+    <% end %>
+  </div>  
+    <%= link_to "retweet", retweet_micropost_path(micropost) %>    
+<!--パーシャルの代用　-->  
+      <%# @favorites = Favorite.all.inspect %> 
+      <%#= render partial: 'users/favorite_form', locals: { micropost: micropost } %>
+      <%#= render partial: 'users/favorite_form', mp: @micropost %>
+<div id="favorite_form_<%= micropost.id %>">
   <% if current_user.favorite?(micropost) %>
-    <%# render 'users/unfavorite' %>
-    <%= micropost.id %>
-<%= form_for(current_user.favorites.find_by(favpost_id: micropost.id), html: { method: :delete }) do |f| %>
-  <%= f.submit "Unfavorite", class: "btn btn-default btn-xs" %>
-<% end %>
-
-
- 
+    <%= render partial: 'users/unfavorite', locals: { micropost: micropost } %>
+    <%#= render partial: 'users/unfavorite', collection: micropost %>    
   <% else %>
-    <%# render 'users/favorite' %>
-    
-<%= form_for(current_user.favorites.build ) do |f| %>
-  <div><%= hidden_field_tag :favpost_id, micropost.id %></div>
-  <%= f.submit "Favorite", class: "btn btn-primary btn-xs" %>
-<% end %>    
-    
-
- </div>      
+    <%= render partial: 'users/favorite', locals: { micropost: micropost } %>
+    <%#= render partial: 'users/favorite', collection: micropost %>
+  <% end %>
+</div>      
 <!--パーシャルの代用　-->      
-      
-      
-      
-      
-    <% end %>    
-    
+
+
   </span>
 </li>

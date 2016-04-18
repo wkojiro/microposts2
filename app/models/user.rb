@@ -63,6 +63,11 @@ class User < ActiveRecord::Base
     favorites.find_by(id).destroy
   end
   
+  def unfavget(micropost)
+#    unfav = favorites.find_by(favpost_id: micropost.id)
+    favorites.find_by(id).destroy
+  end
+  
   def favorite?(micropost)
     favposts.include?(micropost)
   end
