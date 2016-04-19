@@ -1,1 +1,1 @@
-$("#goodpst_<%= micropost.id %>").html("<%= escape_javascript(render('users/fav'), locals: { micropost: micropost }) %>");
+$("#goodpst_<%= micropost.id %>").html("<%= escape_javascript(render :partial => 'users/fav', :locals => { :micropost => @micropost }) %>");

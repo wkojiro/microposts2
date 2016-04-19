@@ -9,6 +9,7 @@ class MicropostsController < ApplicationController
         else
             #新しい教材に載ってたので記載。（苦労したやつ）
             @user = current_user
+            #これでいいのか？？
             @micropost = current_user.microposts.build
             @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
             render 'static_pages/home'
@@ -20,35 +21,32 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.find_by(id: params[:id])
   #  @micropost = current_user.microposts.find(params[:id])
     
- #   return redirect_to root_url if @micropost.nil?
+    return redirect_to root_url if @micropost.nil?
     @micropost.destroy
     flash[:success] = "Micropost deleted"
     redirect_to request.referrer || root_url    
 
     end
     
- #   def retweet
+    def retweet
  #    binding.pry   
- #    @retweetpost = Micropost.find_by(id: params[:id])
- #    @retweetpost = current_user.microposts.build(:content => @retweetpost.content)    
- #    @retweetpost.save
- #    redirect_to request.referrer || root_url  
- #    @microposts = current_user.microposts.build(@retweetpost)
- #      if @microposts.save
- #          flash[:success] = "Retweet success!"
- #           redirect_to root_url
-#       else
+     @retweetpost = Micropost.find_by(id: params[:id])
+     @retweetpost = current_user.microposts.build(:content => @retweetpost.content, :origin_id => @retweetpost.id)    
+       if @retweetpost.save
+            flash[:success] = "Retweet success!"
+            redirect_to request.referrer || root_url
+      else
             #新しい教材に載ってたので記載。（苦労したやつ）
- #           @user = current_user
- #           @micropost = current_user.microposts.build
- #           @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
- #           render 'static_pages/home' 
- #      end
- #   end    
+            @user = current_user
+            @micropost = current_user.microposts.build
+            @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
+            render 'static_pages/home' 
+       end
+    end    
     
     private
     def micropost_params
-        params.require(:micropost).permit(:content)
+        params.require(:micropost).permit(:content,:origin_id)
     end
     
 end

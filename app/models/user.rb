@@ -86,6 +86,6 @@ class User < ActiveRecord::Base
 #  end
 
 #  def retweet?(micropost)
-#    retweetposts.include?(micropost)
+#    Micropost.where(id: micropost.id)
 #  end
 end
