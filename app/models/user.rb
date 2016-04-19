@@ -34,11 +34,11 @@ class User < ActiveRecord::Base
   
 #retweet  
   
-  has_many :retweets, class_name: "Retweet",
-                       foreign_key: "retweetuser_id",
-                       dependent: :destroy
+#  has_many :retweets, class_name: "Retweet",
+#                       foreign_key: "retweetuser_id",
+#                       dependent: :destroy
                   
-  has_many :retweetposts, through: :retweets, source: :retweetpost
+#  has_many :retweetposts, through: :retweets, source: :retweetpost
   
                       
 
@@ -77,15 +77,15 @@ class User < ActiveRecord::Base
     favposts.include?(micropost)
   end
 
-  def retweet(micropost)
-    retweets.find_or_create_by(retweetpost_id: micropost.id)
-  end
+# def retweet(micropost)
+#    retweets.find_or_create_by(retweetpost_id: micropost.id)
+#  end
 
-  def unretweet(micropost)
-    retweets.find_by(id).destroy
-  end
+#  def unretweet(micropost)
+#    retweets.find_by(id).destroy
+#  end
 
-  def retweet?(micropost)
-    retweetposts.include?(micropost)
-  end
+#  def retweet?(micropost)
+#    retweetposts.include?(micropost)
+#  end
 end

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   
+
+  
  # get 'users/:id/following_users' => 'users#following'
 #  get 'users/:id/follower_users' => 'users#follower'  
 
@@ -22,28 +24,31 @@ Rails.application.routes.draw do
    end
  end
  
+  resources :favorites, only: [:new, :create, :destroy] do
+    member do
+     get 'favorite' => 'favorites#fav'
+     get 'unfavorite' => 'favorites#unfav'
+   end
+ end
+
+
+
+
+
+
+
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts do
-     member do
- #      get 'fav' => 'microposts#fav'
-#       get 'unfav' => 'microposts#unfav'
-       get 'retweet' => 'microposts#retweet'
-     end
-   end
+  resources :microposts, only: [:new, :create, :destroy]
   resources :relationships, only:[:create, :destroy]
-  resources :favorites, only:[:create, :destroy] do
-    member do
-       get 'favorite' => 'favorites#fav'
-       get 'unfavorite' => 'favorites#unfav'
+  
+#  resources :favorites do
+#    member do
+#       get 'favorite' => 'favorites#fav'
+#       get 'unfavorite' => 'favorites#unfav'
  #      get 'retweet' => 'microposts#retweet'
-     end
-   end
-  resources :retweets, only:[:create, :destroy] do
-    member do
-       get 'retweet' => 'retweets#create'
-       get 'unretweet' => 'retweets#destroy'
-     end
-   end 
+#     end
+ #  end
+
    
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

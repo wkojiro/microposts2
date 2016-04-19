@@ -11,10 +11,10 @@ class Micropost < ActiveRecord::Base
   has_many :favusers, through: :favorites, source: :favuser  
 
 #retweet
-  has_many :retweets, class_name: "Retweet",
-                       foreign_key: "retweetpost_id",
-                       dependent: :destroy
+#  has_many :retweets, class_name: "Retweet",
+#                       foreign_key: "retweetpost_id",
+#                       dependent: :destroy
                   
-  has_many :retweetusers, through: :retweets, source: :retweetuser  
+#  has_many :retweetusers, through: :retweets, source: :retweetuser  
   
 end

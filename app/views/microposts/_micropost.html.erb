@@ -7,12 +7,12 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <span class="favorite">投稿No.<%= micropost.id %> ユーザーNo.<%= micropost.user.id %></span>
    <% if current_user == micropost.user %>
-      <%# link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+      <%#= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
       <%= link_to "delete2", micropost_path(micropost), method: :delete, data: { confirm: "You sure?" } %>
    <% end %> 
    <div id="goodpst_<%= micropost.id %>" > 
     <% if current_user.favorite?(micropost) %> 
-    <%= link_to "いいね解除", unfavorite_favorite_path(micropost), :class => "btn btn-default btn-xs" %>
+    <%= link_to "いいね", unfavorite_favorite_path(micropost), :class => "btn btn-default btn-xs" %>(<%= micropost.favorites.count %>)
      <%#= render partial: 'users/unfav', locals: { micropost: micropost } %>
     <%#= render partial: 'users/fav', locals: { micropost: micropost } %>   
   <%# @favs = current_user.favorites.where(favpost_id: micropost.id) %>
@@ -23,25 +23,27 @@
      <%#= render partial: 'users/unfav', locals: { micropost: micropost } %>    
     <% end %>
   </div>  
+  <% if current_user.id != micropost.user.id %>
  <div id="retweetpst_<%= micropost.id %>" > 
-    <% if current_user.retweet?(micropost) %> aa
-     <%= link_to "unretweet", unretweet_retweet_path(micropost), :class => "btn btn-default btn-xs" %>    
-    <% else %>bb
-     <%= link_to "retweet", retweet_retweet_path(micropost), :class => "btn btn-info btn-xs" %>  
-    <% end %>  
+    <%# if current_user.retweet?(micropost) %>
+     <%#= link_to "retweet", retweet_micropost_path(micropost), :class => "btn btn-default btn-xs" %>    
+    <%# else %>
+     <%#= link_to "retweet", :class => "btn btn-info btn-xs" %>  
+    <%# end %>  
  </div>
+ <% end %>
 <!--パーシャルの代用　-->  
       <%# @favorites = Favorite.all.inspect %> 
       <%#= render partial: 'users/favorite_form', locals: { micropost: micropost } %>
       <%#= render partial: 'users/favorite_form', mp: @micropost %>
 <div id="favorite_form_<%= micropost.id %>">
-  <% if current_user.favorite?(micropost) %>
-    <%= render partial: 'users/unfavorite', locals: { micropost: micropost } %>
+  <%# if current_user.favorite?(micropost) %>
+    <%#= render partial: 'users/unfavorite', locals: { micropost: micropost } %>
     <%#= render partial: 'users/unfavorite', collection: micropost %>    
-  <% else %>
-    <%= render partial: 'users/favorite', locals: { micropost: micropost } %>
+  <%# else %>
+    <%#= render partial: 'users/favorite', locals: { micropost: micropost } %>
     <%#= render partial: 'users/favorite', collection: micropost %>
-  <% end %>
+  <%# end %>
 </div>      
 <!--パーシャルの代用　-->      
 

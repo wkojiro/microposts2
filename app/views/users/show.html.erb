@@ -8,20 +8,27 @@
       
     </section>
     
-      <div class="col-md-6">
-        following(
+      <div class="col-md-3">
+        フォロー(
 
 <%= link_to (@following_users.count) , following_user_path %>)
 
-   
-        
       </div>
-      <div class="col-md-6">
-        followers(
+      <div class="col-md-3">
+        フォロワー(
 <%= link_to (@follower_users.count) , follower_user_path %>)
 
 
       </div>   
+      <div class="col-md-3">
+        いいね(<%= @user.favorites.count %>)
+
+      </div>   
+      <div class="col-md-3">
+        リツィート（）
+
+
+      </div>         
   </aside>
   <div class="col-md-8">
   <%= render 'follow_form' if logged_in? %>  
