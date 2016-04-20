@@ -1,1 +1,2 @@
-<%= link_to "いいね解除", unfavorite_favorite_path(micropost), :remote => true, :class => "btn btn-default btn-xs", "data-type" => "html" %>
+<%#= link_to "いいね解除", unfavorite_favorite_path(micropost), :remote => true, :class => "btn btn-default btn-xs", "data-type" => "html" %>
+<%= link_to "いいね解除", unfavorite_favorite_path(micropost), :remote => true, :class => "btn btn-default btn-xs" %>(<%= micropost.favorites.count %>)

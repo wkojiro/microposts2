@@ -1,6 +1,5 @@
 class FavoritesController < ApplicationController
     before_action :logged_in_user
-    before_action :all_microposts
 
 ## POST 用メソッド###
  #   def create
@@ -27,9 +26,9 @@ class FavoritesController < ApplicationController
 
     def fav
 #    binding.pry    
-        micropost = Micropost.find(params[:id])  
+        @micropost = Micropost.find(params[:id])  
 #        @favpost = Micropost.find(params[:id])        
-        current_user.favorite(micropost)
+        current_user.favorite(@micropost)
 #       flash[:success] = "good!"
 #       redirect_to request.referrer || root_url         
 #        controller_name = controller_name
@@ -42,12 +41,24 @@ class FavoritesController < ApplicationController
     
     
     def unfav
- #       binding.pry
+ #      binding.pry
  
-   #     @favpost = Micropost.find(params[:id])  
-        micropost = Micropost.find(params[:id])  
-        @unfavpost = current_user.favorites.where(favpost_id: micropost.id) 
-         Favorite.find(@unfavpost[0]).destroy
+#        @micropost = Micropost.find(params[:id])  
+ #        @unfavpost = current_user.favorites.where(favpost_id: @micropost.id) 
+        @unfavpost = current_user.favorites.where(favpost_id: params[:id])
+  #      puts @micropost.inspect
+        current_user.unfavorite(@unfavpost)
+        
+         @micropost = Micropost.find(params[:id])
+ #       puts @micropost.inspect
+   #     puts @unfavpost[2].inspect
+#        puts @unfavpost.pluck(:id)
+ #       puts "hi"
+ #       @micropost = Micropost.find(params[:id])  
+#        
+#         Favorite.find(@unfavpost[0]).destroy
+#         Favorite.find(@micropost[0]).destroy
+         
 #       @unfavpost = Micropost.find(params[:id])   
 
 #        current_user.unfavget(@ids)
@@ -61,9 +72,9 @@ class FavoritesController < ApplicationController
 #         end
     end
     
-private
-    def all_microposts
-      @microposts = Micropost.all
-    end    
-    
+ #   def destroy
+ #       @user = current_user.following_relationships.find(params[:id]).followed
+ #       current_user.unfollow(@user)
+ #   end    
+
 end
