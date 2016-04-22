@@ -24,7 +24,7 @@ class RetweetsController < ApplicationController
     
     
     def create
-         binding.pry 
+   #      binding.pry 
     #     @retweets = Retweet.new(retweet_params)
       
          @retweets= current_user.retweets.build(retweet_params)
@@ -52,14 +52,19 @@ class RetweetsController < ApplicationController
     end
  
     def destroy
-#    binding.pry    
+ #   binding.pry    
+##パラメータにはRetweetのIDが入っている。
+  #  @retweet = current_user.retweets.find_by(id: params[:id])
 
-    @retweet = current_user.retweets.find_by(id: params[:id])
+   @retweet = current_user.retweets.find_by(id: params[:id])
+##削除すべきレコードを@retweetにぶち込んで削除する。 
+  @micropost = Micropost.where(id: @retweet[:retweetpost_id])
+
+ #  @micropost = Micropost.where(id: @retweet[:retweetpost_id])
+#    @retweet = current_user.favorites.where(id: params[:id])
+      
     current_user.unretweet(@retweet)
-
-#    @retweet.destroy
-    @micropost = Micropost.find_by(params[:retweetpost_id])
- #        puts @micropost.inspect    
+puts @micropost.inspect    
 #    flash[:success] = "retweet deleted"
 #    redirect_to request.referrer || root_url          
     end

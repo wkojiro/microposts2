@@ -1,1 +1,1 @@
-$("#"retweet_form_<%= @micropost.id %>").html("<%= escape_javascript(render :partial =>'users/unretweet', :locals => { :micropost => @micropost }) %>");
+$("#retweet_form_<%= @micropost.id %>").html("<%= escape_javascript(render :partial => 'users/unretweet', :locals => { :micropost => @micropost }) %>");
