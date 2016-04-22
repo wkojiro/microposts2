@@ -2,57 +2,54 @@
 
 <!--Retweet の呟き　の場合のテンプレートと通常のテンプレートを分けるべき -->
 
-<% if micropost.origin_id.present? %>
-    <span class "retweet"> <%= micropost.user.name %> がツイート</span>
-
-<% end %>
 
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content"><%= micropost.content %></span>
+  <%= micropost.id %><br>
+  <%= micropost.user.id %>
   
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-    <span class="favorite">投稿No.<%= micropost.id %> ユーザーNo.<%= micropost.user.id %></span>
    <% if current_user == micropost.user %>
-      <%#= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
       <%= link_to "delete2", micropost_path(micropost), method: :delete, data: { confirm: "You sure?" } %>
    <% end %> 
    <div id="favorite_<%= micropost.id %>" > 
     <% if current_user.favorite?(micropost) %>
-    <%#= link_to "いいね", unfavorite_favorite_path(micropost), :class => "btn btn-default btn-xs" %>
      <%= render :partial => 'users/unfav', :locals => { :micropost => micropost } %>
     <% else %>
-    <%#= link_to "いいね", favorite_favorite_path(micropost), :class => "btn btn-primary btn-xs" %>   
     <%= render :partial => 'users/fav', :locals => { :micropost => micropost } %>
     <% end %>
     
     
   </div>
   <% if current_user.id != micropost.user.id %>
- <div id="retweetpst_<%= micropost.id %>" > 
-    <%# if current_user.retweet?(micropost) %>
-     <%= link_to "retweet", retweet_retweet_path(micropost), :class => "btn btn-default btn-xs" %>    
-    <%# else %>
-     <%= link_to "retweet", unretweet_retweet_path(micropost), :class => "btn btn-info btn-xs" %>  
-    <%# end %>  
- </div>
+  
+        <div id="retweet_form_<%= micropost.id %>" > 
+        <% if current_user.retweet?(micropost) %>
+             <%= render :partial => 'users/unretweet', :locals => { :micropost => micropost } %>
+            <%#= form_for(current_user.retweets.find_by(retweetpost_id: micropost.id),html: { method: :delete}, remote: true) do |f| %>
+            <%#= f.submit "retweet解除", class: "btn btn-info btn-xs" %>
+            <%# end %>        
+
+     <%#= link_to "retweet", retweet_retweet_path(micropost), :class => "btn btn-default btn-xs" %>    
+        <% else %>aaa
+             <%= render :partial => 'users/retweet', :locals => { :micropost => micropost } %>
+            <%#= form_for(current_user.retweets.build, remote: true) do |f| %>
+            <%#= hidden_field_tag 'retweet[retweetpost_id]', micropost.id %>
+            <%#= f.submit "retweet", class: "btn btn-primary btn-xs" %>
+            <%# end %>    
+        <% end %>
+            
+        
+         </div>
  <% end %>
-<!--パーシャルの代用　-->  
-      <%# @favorites = Favorite.all.inspect %> 
-      <%#= render partial: 'users/favorite_form', locals: { micropost: micropost } %>
-      <%#= render partial: 'users/favorite_form', mp: @micropost %>
-<div id="favorite_form_<%= micropost.id %>">
-  <%# if current_user.favorite?(micropost) %>
-    <%#= render partial: 'users/unfavorite', locals: { micropost: micropost } %>
-    <%#= render partial: 'users/unfavorite', collection: micropost %>    
-  <%# else %>
-    <%#= render partial: 'users/favorite', locals: { micropost: micropost } %>
-    <%#= render partial: 'users/favorite', collection: micropost %>
-  <%# end %>
-</div>      
-<!--パーシャルの代用　-->      
+<!--パーシャルの代用-->  
+
+
+     
+<!--パーシャルの代用-->      
 
 
   </span>

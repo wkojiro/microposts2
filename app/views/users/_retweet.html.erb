@@ -1,0 +1,13 @@
+<% if controller.controller_name == "static_pages" %>
+    <%= form_for(current_user.retweets.build, remote: true) do |f| %>
+        <%= hidden_field_tag 'retweet[retweetpost_id]', micropost.id %>
+        <%= f.text_area :retweetcontent, placeholder: "Compose new micropost..." %>
+        <%= f.submit "retweet", class: "btn btn-primary btn-xs" %>
+    <% end %>
+<% else %>
+    <%= form_for(current_user.retweets.build, remote: true) do |f| %>
+        <%= hidden_field_tag 'retweet[retweetpost_id]', @micropost.id %>
+        <%= f.text_area :retweetcontent, placeholder: "Compose new micropost..." %>
+        <%= f.submit "retweet", class: "btn btn-primary btn-xs" %>
+    <% end %>
+<% end %>

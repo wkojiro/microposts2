@@ -32,16 +32,7 @@ Rails.application.routes.draw do
  end
 
 
-  resources :retweets, only: [:new, :create, :destroy] do
-    member do
-     get 'retweet' => 'microposts#retweet'
-     get 'unretweet' => 'microposts#unretweet'
-   end
- end
-
-
-
-
+  resources :retweets, only: [:new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:new, :create, :destroy]
   resources :relationships, only:[:create, :destroy]
