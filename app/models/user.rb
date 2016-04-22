@@ -90,8 +90,9 @@ class User < ActiveRecord::Base
 #    retweets.find_or_create_by(retweet)
 #  end
 
-  def unretweet(micropost)
-    retweets.find_by(id).destroy
+  def unretweet(unretweetpost)
+    unretweet_post = retweets.find(unretweetpost)
+    unretweet_post.destroy
   end
 
   def retweet?(micropost)
