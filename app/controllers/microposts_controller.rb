@@ -8,10 +8,11 @@ class MicropostsController < ApplicationController
             redirect_to root_url
         else
             #新しい教材に載ってたので記載。（苦労したやつ）
- #           @user = current_user
+            @user = current_user
             #これでいいのか？？
             @micropost = current_user.microposts.build
-            @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
+            @feed_items = current_user.feed_items.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+            #@feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
             render 'static_pages/home'
         end
     end

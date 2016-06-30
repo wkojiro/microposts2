@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     member do
      get 'following' => 'users#following'
      get 'follower' => 'users#follower'
+     get 'retweet' => 'users#retweet'
    end
  end
  
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
 
   resources :retweets, only: [:new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:new, :create, :destroy]
+  resources :microposts
   resources :relationships, only:[:create, :destroy]
   
 #  resources :favorites do

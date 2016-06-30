@@ -43,8 +43,15 @@ class UsersController < ApplicationController
     @microposts = @user.microposts
     @micropost = current_user.microposts.build if logged_in?    
     @following_users = @user.following_users
-    @follower_users = @user.follower_users    
+    @follower_users = @user.follower_users
+    @retweets = @user.retweets
   end
+  
+  def retweet
+    @user = User.find(params[:id])
+    @retweets = @user.retweets
+  end
+  
   
   
   def following

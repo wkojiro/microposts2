@@ -4,4 +4,5 @@
     <%#= render @microposts %>
     
   </ol>
+  <%= paginate @feed_items %>  <%= page_entries_info( @feed_items ) %>
 <% end %>

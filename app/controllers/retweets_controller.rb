@@ -51,6 +51,12 @@ class RetweetsController < ApplicationController
          
     end
  
+   def show
+
+   end
+ 
+ 
+ 
     def destroy
        # retweet DELETE /retweets/:id(.:format)             retweets#destroy
  #   binding.pry    
@@ -63,7 +69,7 @@ class RetweetsController < ApplicationController
 ##削除すべきレコードを@retweetにぶち込んで削除する。 
  # @micropost = Micropost.where(id: @retweet[:retweetpost_id])
   current_user.unretweet(@retweet)
-  @micropost = Micropost.where(id: @retweet[:retweetpost_id])
+  @micropost = Micropost.find_by(id: @retweet[:retweetpost_id])
  puts @micropost.inspect
     end
     

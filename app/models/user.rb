@@ -62,6 +62,9 @@ class User < ActiveRecord::Base
     Micropost.where(user_id: following_user_ids + [self.id])
   end  
 
+ # def
+#    Retweet.where(user_id: following_user_ids + [self.id])
+#  end
 
   # あるPostをお気に入りにする(引数には、マイクロポストが来るべきかも。)
   def favorite(micropost)

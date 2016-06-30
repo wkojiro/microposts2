@@ -1,0 +1,9 @@
+<%# if controller.controller_name == "static_pages" %><%= @micropost.inspect %>
+    <%= form_for(current_user.retweets.find_by(retweetpost_id: micropost.id), html: { method: :delete }, remote: true) do |f| %>
+    <%= f.submit "retweet解除", class: "btn btn-info btn-xs" %>
+    <% end %>   (<%= micropost.retweets.count %>)(<%= micropost.retweets.inspect %>)
+<%# else %>
+    <%#= form_for(current_user.retweets.find_by(retweetpost_id: @micropost.id), html: { method: :delete }, remote: true) do |f| %>
+    <%#= f.submit "retweet解除", class: "btn btn-info btn-xs" %>
+    <%# end %>  
+<%# end %>  

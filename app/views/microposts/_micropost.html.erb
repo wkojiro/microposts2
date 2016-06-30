@@ -25,9 +25,9 @@
   <% if current_user.id != micropost.user.id %>
     <div id="retweet_form_<%= micropost.id %>" > 
         <% if current_user.retweet?(micropost) %>
-             <%= render :partial => 'users/unretweet', :locals => { :micropost => micropost } %>
-    　  <% else %>
-             <%= render :partial => 'users/retweet', :locals => { :micropost => micropost } %>
+             <%= render :partial => 'users/unretweetpost', :locals => { :micropost => micropost } %>
+        <% else %>
+             <%= render :partial => 'users/retweetpost', :locals => { :micropost => micropost } %>
         <% end %>
     </div>
   <% end %>

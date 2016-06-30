@@ -1,0 +1,10 @@
+
+<%= retweet.id %>
+<%= retweet.retweetcontent %>
+<%= retweet.retweetuser_id %>
+<%= retweet.retweetpost_id %>
+<%= retweet.created_at %>
+<br>
+元ポスト
+<%= Micropost.find(retweet.retweetpost_id).inspect %> 
+<hr>
